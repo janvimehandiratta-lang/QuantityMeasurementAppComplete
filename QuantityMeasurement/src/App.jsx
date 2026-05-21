@@ -22,7 +22,7 @@ export default function App() {
 
   const handleGoogleLogin = () => {
     // Agar localhost refuse kare, toh exact loopback IP use karna best hota hai
-    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+    window.location.href = "http://18.212.19.81.sslip.io:8080/oauth2/authorization/google";
   };
 
   const handleLogout = () => {
