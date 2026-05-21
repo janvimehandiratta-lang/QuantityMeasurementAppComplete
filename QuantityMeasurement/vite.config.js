@@ -8,4 +8,8 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  server: {
+    host: '0.0.0.0',
+    allowedHosts: ['18.212.19.81.sslip.io'] // <-- Google OAuth wale domain ko allow kar diya
+  }
 })
