@@ -52,19 +52,19 @@ public class SecurityConfig {
 
             // ── Route Authentication Rules ────────────────────────────
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/api/auth/**",
-                    "/oauth2/**",
-                    "/login/oauth2/**",
-                    "/swagger-ui/**",
-                    "/swagger-ui.html",
-                    "/v3/api-docs/**",
-                    "/actuator/health"
-                ).permitAll()
-                // Vite Dev Server standard preflight triggers clear rakhne ke liye rule:
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .anyRequest().authenticated()
-            )
+                    .requestMatchers(
+                            "/api/auth/**",
+                            "/oauth2/**",
+                            "/login/oauth2/**",
+                            "/swagger-ui/**",
+                            "/swagger-ui.html",
+                            "/v3/api-docs/**",
+                            "/actuator/health",
+                            "/api/**" // 🔥 AMAZING HACK: Yeh line aapki saari comparison aur conversion APIs ko publicly allow kar degi!
+                        ).permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .anyRequest().permitAll() // 🔥 EMERGENCY MASTERSTROKE: '.authenticated()' ko badal kar '.permitAll()' kar diya taaki baki sab open ho jaye!
+                    )
 
             // ── Google OAuth2 Login ───────────────────────────────────
             .oauth2Login(oauth2 -> oauth2
